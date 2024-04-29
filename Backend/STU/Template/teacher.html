@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لیست معلمان</title>
+</head>
+<body>
+    <h1>لیست معلمان</h1>
+    <table border="1">
+        <thead>
+            <tr>
+                <th>نام استاد</th>
+                <th>کد ملی</th>
+                <th>رشته تحصیلی</th>
+                <th>مدرک</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for teacher in teachers %}
+            <tr>
+                <td>{{ teacher.Fullname }}</td>
+                <td>{{ teacher.NationalNumber }}</td>
+                <td>{{ teacher.Major.MajorName }}</td>
+                <td>{{ teacher.get_Grade_display }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

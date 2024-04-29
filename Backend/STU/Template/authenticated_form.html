@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>فرم احراز هویت</title>
+</head>
+<body>
+    <h1>فرم احراز هویت</h1>
+    <form method="post">
+        {% csrf_token %}
+        <label for="username">نام کاربری:</label><br>
+        <input type="text" id="username" name="username"><br>
+        <label for="password">رمز عبور:</label><br>
+        <input type="password" id="password" name="password"><br><br>
+        <input type="submit" value="ورود">
+    </form>
+</body>
+</html>
