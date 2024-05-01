@@ -1,9 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
-from django.utils.timezone import datetime
 from django.utils import timezone
-from django import forms
-from django.contrib.auth.forms import PasswordChangeForm , PasswordResetForm
+
 # Create your models here.
 
 
@@ -59,8 +57,8 @@ class ChoiseLesson(models.Model):
         verbose_name_plural = "انتخاب واحد"
     
     Namelesson = models.ForeignKey( Lesson, on_delete=models.CASCADE , verbose_name="نام درس" , null=True )
-    ClassDayTime =models.DateTimeField(default= datetime, verbose_name="زمان و تاریخ شروع کلاس" , null=True , blank = True)
-    ExamDateTime = models.DateTimeField(default=datetime, verbose_name= "  زمان و تاریخ امتحان" , null=True , blank = True)
+    ClassDayTime =models.DateTimeField( verbose_name="زمان و تاریخ شروع کلاس" , null=True , blank = True)
+    ExamDateTime = models.DateTimeField( verbose_name= "  زمان و تاریخ امتحان" , null=True , blank = True)
     
 
     def __str__(self) :
@@ -111,23 +109,38 @@ class Register(models.Model):
     CollageName = models.ForeignKey(Collage , on_delete=models.CASCADE , verbose_name="دانشکده")
     Content = models.CharField(max_length=150 , verbose_name= " توضیحات")
     Student_id = models.IntegerField(unique=True , verbose_name="شماره دانشچویی" , null=True ,) 
-    user = models.OneToOneField(User, on_delete=models.CASCADE , verbose_name="نام کاربری")
-    password = models.CharField(max_length=128 , verbose_name="رمز عبور")
+    user = models.OneToOneField(User, on_delete=models.CASCADE , verbose_name="نام کاربری" , null=True)
+    TermEnteryCode = models.IntegerField(null=True , verbose_name="کد ترم ورودی")
+
+    Mariide_choise = ((1,"مجرد" ) , (2,"متاهل"))
+    MarridSituation = models.IntegerField(choices=Mariide_choise , verbose_name= "وضیعت تاهل", null=True)
+
+    email = models.EmailField(unique=True , verbose_name="نامه الکترونیکی" , null=True)
+    DataEnrollment = models.DateField(verbose_name="تاریخ ثیت نام" , null=True)
+    DiplomaAvrage =models.DecimalField(decimal_places= 2    , max_digits=2 , verbose_name="معدل دیپلم" , null=True)
+
+
+    Admission_choises = ((1 , "بدون کنکور") , (2 , "با کنکور" ))
+    Admission =models.IntegerField(choices=Admission_choises , verbose_name="نحوه پذیرش" , null=True)
+
+    Gender_choise = (( 1, "زن") , (2 , "مرد"))
+    Gender =models.IntegerField(choices=Gender_choise , verbose_name="جنسیت", null=True)
+
+    PlaceOfIssue = models.CharField(null = True , verbose_name="محل صدور")
+
+    choise_eduacationsStatus = ((1 ,"در حال تحصیل") , (2 , "اخراج") , (3,"انصراف") , (4,"مرخصی"))
+    EduacatinoalStatus = models.IntegerField(choices=choise_eduacationsStatus , verbose_name="وضیعت تحصیل" , null=True)
+
+    choise_religion = ((1 , "شیعه") , (2 , "سنی") ,(3 , "دیگر") ) 
+    Religion = models.IntegerField(choices=choise_religion , verbose_name="مذهب" , null=True)
+
 
 
     Grade_choises = (( 1, 'لیسانس')  , ( 2 , 'فوق لیسانس') , ( 3 ,'دکتری'))
-    Grade = models.CharField(choices=Grade_choises, verbose_name="مقطع" )
+    Grade = models.IntegerField(choices=Grade_choises, verbose_name="مقطع" )
 
     def __str__(self) :
         return self.Fullname
-
-class CustomPasswordChangeForm(PasswordChangeForm):
-    old_password = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    new_password1 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-    new_password2 = forms.CharField(widget=forms.PasswordInput(attrs={'class': 'form-control'}))
-
-class CustomPasswordResetForm(PasswordResetForm):
-    email = forms.EmailField(widget=forms.EmailInput(attrs={'class': 'form-control'}))
 
 
 

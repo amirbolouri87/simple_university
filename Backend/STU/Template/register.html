@@ -1,53 +1,46 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register</title>
-</head>
-<body>
-    <h2>Register</h2>
-    <form method="post">
-        {% csrf_token %}
-        <label for="id_Fullname">Full Name:</label>
-        <input type="text" name="Fullname" id="id_Fullname">
-        <label for="id_FatherName">Father Name:</label>
-        <input type="text" name="FatherName" id="id_FatherName">
-        <label for="id_Birth">Birth Date:</label>
-        <input type="date" name="Birth" id="id_Birth">
-        <label for="id_NationalNumber">National Number:</label>
-        <input type="text" name="NationalNumber" id="id_NationalNumber">
-        <label for="id_Address">Address:</label>
-        <input type="text" name="Address" id="id_Address">
-        <label for="id_PostalCode">Postal Code:</label>
-        <input type="text" name="PostalCode" id="id_PostalCode">
-        <label for="id_Major">Major:</label>
-        <select name="Major" id="id_Major">
-            {% for major in majors %}
-            <option value="{{ major.id }}">{{ major.name }}</option>
-            {% endfor %}
-        </select>
-        <label for="id_CollageName">Collage Name:</label>
-        <select name="CollageName" id="id_CollageName">
-            {% for collage in collages %}
-            <option value="{{ collage.id }}">{{ collage.name }}</option>
-            {% endfor %}
-        </select>
-        <label for="id_Content">Content:</label>
-        <textarea name="Content" id="id_Content"></textarea>
-        <label for="id_Student_id">Student ID:</label>
-        <input type="text" name="Student_id" id="id_Student_id">
-        <label for="id_Grade">Grade:</label>
-        <select name="Grade" id="id_Grade">
-            <option value="1">لیسانس</option>
-            <option value="2">فوق لیسانس</option>
-            <option value="3">دکتری</option>
-        </select>
-        <label for="id_username">Username:</label>
-        <input type="text" name="username" id="id_username">
-        <label for="id_password">Password:</label>
-        <input type="password" name="password" id="id_password">
-        <button type="submit">Submit</button>
-    </form>
-</body>
-</html>
+<form method="post">
+    {% csrf_token %}
+    <label for="Fullname">نام و نام خانوادگی:</label>
+    <input type="text" id="Fullname" name="Fullname" maxlength="30" required><br>
+
+    <label for="FatherName">نام پدر:</label>
+    <input type="text" id="FatherName" name="FatherName" maxlength="20" required><br>
+
+    <label for="Birth">تاریخ تولد:</label>
+    <input type="date" id="Birth" name="Birth" required><br>
+
+    <label for="NationalNumber">کد ملی:</label>
+    <input type="number" id="NationalNumber" name="NationalNumber" required><br>
+
+    <label for="Address">ادرس:</label>
+    <input type="text" id="Address" name="Address" maxlength="100" required><br>
+
+    <label for="PostalCode">کدپستی:</label>
+    <input type="number" id="PostalCode" name="PostalCode" required><br>
+
+    <label for="Major">رشته:</label>
+    <select id="Major" name="Major" required>
+        <!-- Options for Majors should be populated dynamically -->
+    </select><br>
+
+    <!-- Similar select inputs for CollageName, MarridSituation, Admission, Gender, EduacatinoalStatus, Religion, and Grade -->
+
+    <label for="Content">توضیحات:</label>
+    <textarea id="Content" name="Content" maxlength="150" required></textarea><br>
+
+    <label for="Student_id">شماره دانشجویی:</label>
+    <input type="number" id="Student_id" name="Student_id" required><br>
+
+    <label for="user">نام کاربری:</label>
+    <input type="text" id="user" name="user" required><br>
+
+    <label for="password">رمز عبور:</label>
+    <input type="password" id="password" name="password" required><br>
+
+    <label for="TermEnteryCode">کد ورود به ترم:</label>
+    <input type="number" id="TermEnteryCode" name="TermEnteryCode"><br>
+
+    <!-- Similar inputs for email, DataEnrollment, and DiplomaAvrage -->
+
+    <button type="submit">ثبت</button>
+</form>
