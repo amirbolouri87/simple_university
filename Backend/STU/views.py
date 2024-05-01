@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Collage , Major , Lesson, ChoiseLesson , Authticat , Register , Teacher
+from .models import Collage , Major , Lesson, ChoiseLesson , Authticat , Register , Teacher , Borrow , Liberary
 # Create your views here.
 from django.contrib.auth.models import User
 
@@ -89,3 +89,23 @@ def TeacherListView(request):
      return render (request ,"STU/register.html" , context )
 
 
+def BorrowListView(request):
+     Borrows = Borrow
+
+     context = {
+          "Borrow" : Borrows
+     }
+
+     return render (request ,"STU/borrow.html" , context)
+
+
+
+def LiberaryListView(request):
+     Liberarys = Liberary
+
+     context = {
+          "Library " :Liberarys
+     }
+
+
+     return render (request , "STU/liberary.html" , context)

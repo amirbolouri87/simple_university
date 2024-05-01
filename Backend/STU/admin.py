@@ -4,7 +4,7 @@ from django.contrib import admin
 
 
 
-from .models import Collage , Major , Lesson , ChoiseLesson , Authticat , Register , Teacher
+from .models import Collage , Major , Lesson , ChoiseLesson , Authticat , Register , Teacher , Borrow , Liberary
 
 
 
@@ -16,3 +16,5 @@ admin.site.register(ChoiseLesson)
 admin.site.register(Authticat)
 admin.site.register(Register)
 admin.site.register(Teacher)
+admin.site.register(Borrow)
+admin.site.register(Liberary)

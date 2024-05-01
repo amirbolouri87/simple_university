@@ -1,47 +1,53 @@
 <!DOCTYPE html>
-<html lang="fa">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>فرم ثبت نام</title>
+    <title>Register</title>
 </head>
 <body>
-    <h1>فرم ثبت نام</h1>
+    <h2>Register</h2>
     <form method="post">
         {% csrf_token %}
-        <label for="fullname">نام و نام خانوادگی:</label><br>
-        <input type="text" id="fullname" name="fullname"><br>
-        <label for="fathername">نام پدر:</label><br>
-        <input type="text" id="fathername" name="fathername"><br>
-        <label for="birth">تاریخ تولد:</label><br>
-        <input type="date" id="birth" name="birth"><br>
-        <label for="nationalnumber">شماره ملی:</label><br>
-        <input type="text" id="nationalnumber" name="nationalnumber"><br>
-        <label for="address">آدرس:</label><br>
-        <input type="text" id="address" name="address"><br>
-        <label for="postalcode">کد پستی:</label><br>
-        <input type="text" id="postalcode" name="postalcode"><br>
-        <label for="major">رشته تحصیلی:</label><br>
-        <select id="major" name="major">
+        <label for="id_Fullname">Full Name:</label>
+        <input type="text" name="Fullname" id="id_Fullname">
+        <label for="id_FatherName">Father Name:</label>
+        <input type="text" name="FatherName" id="id_FatherName">
+        <label for="id_Birth">Birth Date:</label>
+        <input type="date" name="Birth" id="id_Birth">
+        <label for="id_NationalNumber">National Number:</label>
+        <input type="text" name="NationalNumber" id="id_NationalNumber">
+        <label for="id_Address">Address:</label>
+        <input type="text" name="Address" id="id_Address">
+        <label for="id_PostalCode">Postal Code:</label>
+        <input type="text" name="PostalCode" id="id_PostalCode">
+        <label for="id_Major">Major:</label>
+        <select name="Major" id="id_Major">
             {% for major in majors %}
-            <option value="{{ major.id }}">{{ major.MajorName }}</option>
+            <option value="{{ major.id }}">{{ major.name }}</option>
             {% endfor %}
-        </select><br>
-        <label for="collage">دانشکده:</label><br>
-        <select id="collage" name="collage">
+        </select>
+        <label for="id_CollageName">Collage Name:</label>
+        <select name="CollageName" id="id_CollageName">
             {% for collage in collages %}
-            <option value="{{ collage.id }}">{{ collage.Collagename }}</option>
+            <option value="{{ collage.id }}">{{ collage.name }}</option>
             {% endfor %}
-        </select><br>
-        <label for="content">محتوای توضیحات:</label><br>
-        <textarea id="content" name="content"></textarea><br>
-        <label for="grade">مقطع تحصیلی:</label><br>
-        <select id="grade" name="grade">
+        </select>
+        <label for="id_Content">Content:</label>
+        <textarea name="Content" id="id_Content"></textarea>
+        <label for="id_Student_id">Student ID:</label>
+        <input type="text" name="Student_id" id="id_Student_id">
+        <label for="id_Grade">Grade:</label>
+        <select name="Grade" id="id_Grade">
             <option value="1">لیسانس</option>
             <option value="2">فوق لیسانس</option>
             <option value="3">دکتری</option>
-        </select><br><br>
-        <input type="submit" value="ثبت نام">
+        </select>
+        <label for="id_username">Username:</label>
+        <input type="text" name="username" id="id_username">
+        <label for="id_password">Password:</label>
+        <input type="password" name="password" id="id_password">
+        <button type="submit">Submit</button>
     </form>
 </body>
 </html>
