@@ -1,7 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import User
 from django.utils import timezone
-
+from django_jalali.db import models as jmodels
 # Create your models here.
 
 
@@ -57,8 +57,8 @@ class ChoiseLesson(models.Model):
         verbose_name_plural = "انتخاب واحد"
     
     Namelesson = models.ForeignKey( Lesson, on_delete=models.CASCADE , verbose_name="نام درس" , null=True )
-    ClassDayTime =models.DateTimeField( verbose_name="زمان و تاریخ شروع کلاس" , null=True , blank = True)
-    ExamDateTime = models.DateTimeField( verbose_name= "  زمان و تاریخ امتحان" , null=True , blank = True)
+    ClassDayTime =jmodels.jDateTimeField( verbose_name="زمان و تاریخ شروع کلاس" , null=True , blank = True)
+    ExamDateTime = jmodels.jDateTimeField( verbose_name= "  زمان و تاریخ امتحان" , null=True , blank = True)
     
 
     def __str__(self) :
@@ -73,7 +73,7 @@ class Authticat(models.Model):
     
     Fullname =models.CharField(max_length=30 , verbose_name="نام و نام خانوادگی")
     Phonenumber = models.IntegerField( verbose_name="شماره همراه")
-    Birth =models.DateField(verbose_name="تاریخ تولد")
+    Birth =jmodels.jDateField(verbose_name="تاریخ تولد")
     
 
 
@@ -101,7 +101,7 @@ class Register(models.Model):
        
     Fullname =models.CharField(max_length=30 , verbose_name="نام و نام خانوادگی")
     FatherName = models.CharField(max_length=20 , verbose_name="نام پدر")
-    Birth = models.DateField(verbose_name="تاریخ تولد")
+    Birth = jmodels.jDateField(verbose_name="تاریخ تولد")
     NationalNumber = models.IntegerField(verbose_name="کد ملی")
     Address = models.CharField(max_length=100 , verbose_name="ادرس")
     PostalCode=models.IntegerField( verbose_name="کدپستی")
@@ -116,7 +116,7 @@ class Register(models.Model):
     MarridSituation = models.IntegerField(choices=Mariide_choise , verbose_name= "وضیعت تاهل", null=True)
 
     email = models.EmailField(unique=True , verbose_name="نامه الکترونیکی" , null=True)
-    DataEnrollment = models.DateField(verbose_name="تاریخ ثیت نام" , null=True)
+    DataEnrollment = jmodels.jDateField(verbose_name="تاریخ ثیت نام" , null=True)
     DiplomaAvrage =models.DecimalField(decimal_places= 2    , max_digits=2 , verbose_name="معدل دیپلم" , null=True)
 
 
@@ -170,8 +170,8 @@ class Borrow(models.Model):
         verbose_name_plural = "امانت"
     
 
-    borrow_date = models.DateTimeField(default=timezone.now , verbose_name="تحویل گرفتن")
-    return_date = models.DateTimeField(null=True, blank=True, verbose_name="تحویل دادن")
+    borrow_date = jmodels.jDateTimeField(default=timezone.now , verbose_name="تحویل گرفتن")
+    return_date = jmodels.jDateTimeField(null=True, blank=True, verbose_name="تحویل دادن")
 
 
 

@@ -1,3 +1,7 @@
 django
 pillow
 djangorestframework
+pylint
+flake8
+django-jalali
+

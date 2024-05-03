@@ -16,17 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from STU.views import CollageListView , MajorListView , LessonListView , ChoiseLessonView , AuthticatListView , RegisterListView , TeacherListView , BorrowListView , LiberaryListView
-
+from STU.views import CollageListView ,  MajorListView ,AuthticatListView , RegisterListView ,  BorrowListView , LiberaryListView
+from Students.views import MajorListViews , LessonListView , ChoiseLessonView , TeacherListView 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('STU/Collage/list',CollageListView),
     path('STU/major/list' , MajorListView),
-    path('STU/Lessons/list' , LessonListView),
-    path('STU/ChoiseLesson/list' , ChoiseLessonView),
+    path('Students/major/list' , MajorListViews),
+    path('Students/Lessons/list' , LessonListView),
+    path('Students/ChoiseLesson/list' , ChoiseLessonView),
     path('STU/Authicat/list' , AuthticatListView),
     path('STU/Register/list' , RegisterListView),
-    path('STU/Teacher/list' , TeacherListView),
+    path('Students/Teacher/list' , TeacherListView),
     path('STU/Borrow/list' , BorrowListView), 
     path('STU/Liberary/list' , LiberaryListView),
 ]
