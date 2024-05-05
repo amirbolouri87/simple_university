@@ -1,7 +1,7 @@
 from django.db import models
 from django.utils import timezone
 # Create your models here.
-from django_jalali.db import models as jmodels
+from django_jalali.db.models import jDateTimeField
 
 
 
@@ -40,18 +40,39 @@ class ChoiseUnit(models.Model):
         verbose_name_plural = "انتخاب واحد"
 
     id = models.AutoField(primary_key=True)
-    Namelesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True)
-    ClassDayTime = models.DateTimeField(verbose_name="زمان و تاریخ شروع کلاس", null=True, blank=True)
-    ExamDateTime = models.DateTimeField(verbose_name="  زمان و تاریخ امتحان", null=True, blank=True)
-    TIMEandDATE = models.DateTimeField(verbose_name="ساعت و روز کلاس", null=True)
+    Namelesson = models.ForeignKey(Lesson, on_delete=models.CASCADE, null=True , verbose_name="نام درس")
+    ClassDayTime = jDateTimeField(verbose_name="زمان و تاریخ شروع کلاس", null=True, blank=True)
+    ExamDateTime = jDateTimeField(verbose_name="  زمان و تاریخ امتحان", null=True, blank=True)
+    TIMEandDATE = jDateTimeField(verbose_name="ساعت و روز کلاس", null=True)
     SerialOfClass = models.IntegerField(verbose_name="سریال کلاس", null=True)
-
-    created_at = models.DateTimeField(default=timezone.now)
+    EnterYears = models.IntegerField(null =True , verbose_name="سال ورودی" , )
+    created_at = jDateTimeField(default=timezone.now)
 
     Status_choises = ((1, 'معتبر'), (2, 'نامعتبر'))
     StatusofCredit = models.IntegerField(choices=Status_choises, verbose_name="وضعیت اعتبار کلاس", null=True)
     
     VariablePoetry = models.IntegerField(null=True, verbose_name="شهریه متغیر")
+
+
+    @property
+
+    def is_entery_year_valid(self):
+        current_year = timezone.now().year
+
+        if self.EnterYears:
+            return self.EnterYears >= (current_year - 4)
+        return False
+    
+
+    def __str__(self) -> str:
+        return str(self.Namelesson)
+
+
+
+
+
+
+
 
     def __str__(self):
         return str(self.Namelesson)
