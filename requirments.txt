@@ -4,4 +4,6 @@ djangorestframework
 pylint
 flake8
 django-jalali
+pandas
+pika
 
