@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% csrf_token %}
+<html lang="fa">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>لیست رشته‌های تحصیلی</title>
+</head>
+<body>
+    <h1>لیست رشته‌های تحصیلی</h1>
+    <ul>
+        {% for major in majors %}
+            <li>{{ major.MajorName }}</li>
+        {% endfor %}
+    </ul>
+</body>
+</html>

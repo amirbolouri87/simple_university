@@ -34,36 +34,8 @@ class Major(models.Model):
 
 
 
-class Lesson(models.Model):
-    class Meta :
-        verbose_name = "دروس ارايه شده"
-        verbose_name_plural = "دروس ارايه شده"
-
-
-    NameOfLesson = models.CharField(max_length=20 ,verbose_name="نام درس")
-    SerialOfLesson =models.IntegerField( unique=True , verbose_name="کد درس")
-    Major = models.ForeignKey(Major , on_delete=models.CASCADE , verbose_name="رشته")
-
-
-    def __str__(self) :
-        return self.NameOfLesson
-
-
 
     
-class ChoiseLesson(models.Model):
-    class Meta:
-        verbose_name = "انتخاب واحد"
-        verbose_name_plural = "انتخاب واحد"
-    
-    Namelesson = models.ForeignKey( Lesson, on_delete=models.CASCADE , verbose_name="نام درس" , null=True )
-    ClassDayTime =jmodels.jDateTimeField( verbose_name="زمان و تاریخ شروع کلاس" , null=True , blank = True)
-    ExamDateTime = jmodels.jDateTimeField( verbose_name= "  زمان و تاریخ امتحان" , null=True , blank = True)
-    
-
-    def __str__(self) :
-        return self.Namelesson
-
 
 
 class Authticat(models.Model):
@@ -88,6 +60,10 @@ class Authticat(models.Model):
         else :
             User.DoesNotExist
             return None
+        
+
+    def __str__(self) -> str:
+        return self.Fullname
 
 
 
@@ -117,7 +93,7 @@ class Register(models.Model):
 
     email = models.EmailField(unique=True , verbose_name="نامه الکترونیکی" , null=True)
     DataEnrollment = jmodels.jDateField(verbose_name="تاریخ ثیت نام" , null=True)
-    DiplomaAvrage =models.DecimalField(decimal_places= 2    , max_digits=2 , verbose_name="معدل دیپلم" , null=True)
+   # DiplomaAvrage =models.DecimalField(decimal_places= 2 , max_digits=4, verbose_name="معدل دیپلم" , )
 
 
     Admission_choises = ((1 , "بدون کنکور") , (2 , "با کنکور" ))
@@ -145,22 +121,7 @@ class Register(models.Model):
 
 
 
-class Teacher(models.Model):
-    class Meta:
-        verbose_name = "اساتید"
-        verbose_name_plural = "اساتید"
 
-
-
-    Fullname =models.CharField(max_length=30 , verbose_name="نام استاد")
-    NationalNumber = models.IntegerField(verbose_name="کدملی")
-    Major=models.ForeignKey(Major , on_delete=models.CASCADE , verbose_name="رشته")
-    Grade_choises = ((2, 'فوق لیسانس') , (3 , 'دکتری'))
-    Grade = models.CharField(choices=Grade_choises , verbose_name="مدرک")
-
-    def __str__(self) :
-        return self.Fullname
-    
 
 
 
@@ -169,14 +130,14 @@ class Borrow(models.Model):
         verbose_name = "امانت"
         verbose_name_plural = "امانت"
     
-
+    Bookname =models.CharField(verbose_name= 'نام مسؤل کتابخانه', null=True)
     borrow_date = jmodels.jDateTimeField(default=timezone.now , verbose_name="تحویل گرفتن")
     return_date = jmodels.jDateTimeField(null=True, blank=True, verbose_name="تحویل دادن")
 
 
 
     def __str__(self) :
-        return self.return_date
+        return self.name
 
 
 class Liberary(models.Model):
@@ -187,12 +148,12 @@ class Liberary(models.Model):
     BookName = models.CharField( max_length=30 , verbose_name="نام کتاب")
     Student_id = models.ForeignKey(Register , on_delete=models.CASCADE , verbose_name="شماره دانشجویی")
     grouping = models.ForeignKey(Major , on_delete=models.CASCADE , verbose_name="دسته بندی")
-    Writer =models.ForeignKey(Teacher , on_delete=models.CASCADE ,verbose_name="نویسنده" )
+    Writer =models.CharField(verbose_name="نویسنده" )
     CheckOut = models.OneToOneField(Borrow, on_delete=models.CASCADE , verbose_name="زمان امانت گیری")
     content =models.CharField(max_length=100 , blank=True , verbose_name= "نظر")
 
 
 
     def __str__(self) :
-        return self.Student_id
+        return self.BookName
 

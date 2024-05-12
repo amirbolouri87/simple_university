@@ -1,5 +1,5 @@
 from django.shortcuts import render
-from .models import Collage , Major , Lesson, ChoiseLesson , Authticat , Register , Teacher , Borrow , Liberary
+from .models import Collage , Major , Authticat , Register , Borrow , Liberary
 # Create your views here.
 from django.contrib.auth.models import User
 
@@ -16,14 +16,10 @@ def CollageListView(request):
 
 
 def MajorListView(request):
-    Majors = Major.objects.all()
+    majors = Major.objects.all()
 
-    context = {
-        "major" : Majors
-    }
-
-    return render(request , "STU/major.html", context)
-
+    majors = Major.objects.all()
+    return render(request, 'majors.html', {'majors': majors})   
 
 
 
