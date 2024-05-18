@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Choose Lessons</title>
+</head>
+<body>
+    <h2>Choose Lessons</h2>
+    <form method="post">
+        {% csrf_token %}
+        <label for="id_Namelesson">Lesson Name:</label>
+        <select name="Namelesson" id="id_Namelesson">
+            {% for lesson in lessons %}
+            <option value="{{ lesson.id }}">{{ lesson.name }}</option>
+            {% endfor %}
+        </select>
+        <label for="id_ClassDayTime">Class Day Time:</label>
+        <input type="datetime-local" name="ClassDayTime" id="id_ClassDayTime">
+        <label for="id_ExamDateTime">Exam Date Time:</label>
+        <input type="datetime-local" name="ExamDateTime" id="id_ExamDateTime">
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

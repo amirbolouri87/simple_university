@@ -1,12 +1,12 @@
 from django.shortcuts import render
-from .models import Collage , Major , Lesson, ChoiseLesson , Authticat , Register , Teacher
+from .models import Collage , Major , Authticat , Register , Borrow , Liberary
 # Create your views here.
 from django.contrib.auth.models import User
 
 
 
 def CollageListView(request):
-    Collages = Collage
+    Collages = Collage.objects.all()
 
     context = {
         "collage" : Collages
@@ -15,38 +15,11 @@ def CollageListView(request):
     return render (request , "STU/collage.html", context)
 
 
-
-
 def MajorListView(request):
-    Majors = Major
+    majors = Major.objects.all()
 
-    context = {
-        "major" : Majors
-    }
-
-    return render(request , "STU/major.html", context)
-
-
-
-def LessonListView(request):
-    Lessons = Lesson
-
-    context ={
-        "lesson" : Lessons
-
-    }
-    return render (request ,"STU/lesson.html"  ,context)
-
-
-
-def ChoiseLessonView(request):
-    ChoiseLessons = ChoiseLesson
-
-    context = {
-        "choiselesson" : ChoiseLessons
-    }
-
-    return render (request ,"STU/choiselesson.html" , context )
+    majors = Major.objects.all()
+    return render(request, 'majors.html', {'majors': majors})   
 
 
 
@@ -72,7 +45,7 @@ def AuthticatListView(request):
 
 
 def RegisterListView(request):
-     Registers = Register
+     Registers = Register.objects.all()
 
      context ={
          "Register" : Registers
@@ -80,12 +53,26 @@ def RegisterListView(request):
      return render (request ,"STU/register.html" , context )
 
 
-def TeacherListView(request):
-     Teachers = Teacher
+
+
+
+def BorrowListView(request):
+     Borrows = Borrow.objects.all()
 
      context = {
-          "Teacher" : Teachers
+          "Borrow" : Borrows
      }
-     return render (request ,"STU/register.html" , context )
+
+     return render (request ,"STU/borrow.html" , context)
 
 
+
+def LiberaryListView(request):
+     Liberarys = Liberary.objects.all()
+
+     context = {
+          "Library " :Liberarys
+     }
+
+
+     return render (request , "STU/liberary.html" , context)

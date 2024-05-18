@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+    container_name: UNI-database
+    image: docker.arvancloud.ir/postgres:15.4
+    restart : always
+    volumes:
+      - ./UNI_data:/var/lib/postgresql/database
+    env_file:
+      - .env.database
+    ports:
+      - "5432:5432"
+
+
+
+
+
+  rabbitmq:
+    image: rabbitmq :3.8-management-alpine 
+    container_name: 'my-rabbit'
+    restart: unless-stopped
+    ports:
+      - "5672:5672"  
+      - "15672:15672"  
+    environment:
+      - .env.rabbitmq
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
+        

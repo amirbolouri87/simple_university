@@ -16,15 +16,18 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from STU.views import CollageListView , MajorListView , LessonListView , ChoiseLessonView , AuthticatListView , RegisterListView , TeacherListView
-
+from STU.views import CollageListView ,  MajorListView ,AuthticatListView , RegisterListView ,  BorrowListView , LiberaryListView
+from Students.views import MajorListViews , LessonListView , ChoiseLessonView , TeacherListView 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('STU/Collage/list',CollageListView),
-    path('STU/Major/list' , MajorListView),
-    path('STU/Lessons/list' , LessonListView),
-    path('STU/ChoiseLesson/list' , ChoiseLessonView),
-    path('STU/Authicat/list' , AuthticatListView),
-    path('STU/Register/list' , RegisterListView),
-    path('STU/Teacher/list' , TeacherListView)
+    path('STU/Borrow/list' , BorrowListView , name = 'borrow_list'),
+    path('STU/Collage/lisr' , CollageListView, name='collage_name'),
+    path('STU/liberary/list' , LiberaryListView , name='liberary_list'),
+    path('STU/Major/list' , MajorListView, name='majors_list'),
+    path('STU/Register/list' , RegisterListView , name = 'register_list'),
+    path('STU/Authicat/list/', AuthticatListView, name='authticat_list'),
+    path('Students/Major/list' , MajorListViews, name='majors_list'),
+    path('Students/Lesson/list' , LessonListView , name='lesson_list'),
+    path('Students/ChoiseLesson/list' , ChoiseLessonView , name='choiselesson_name'),
+    path('Students/Teacher/list' , TeacherListView , name='teacher_list'),
 ]
